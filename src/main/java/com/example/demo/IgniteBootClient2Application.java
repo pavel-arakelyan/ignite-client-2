@@ -8,17 +8,9 @@ import org.apache.ignite.configuration.IgniteConfiguration;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@ComponentScan
-public class IgniteBootClient2Application {
-//
-//	@Autowired
-//	CacheManager cacheManager;
+public class IgniteBootClient2Application implements CommandLineRunner{
 
 	public static void main(String[] args) {
 		SpringApplication.run(IgniteBootClient2Application.class, args);
@@ -27,11 +19,12 @@ public class IgniteBootClient2Application {
 	public void run(String... strings) throws Exception {
 		IgniteConfiguration cfg = new IgniteConfiguration();
 		cfg.setPeerClassLoadingEnabled(true);
+		cfg.setIgniteInstanceName("grid_1");
 		Ignition.setClientMode(true);
 		Ignite ignite = Ignition.start(cfg);
 		IgniteCache<String, String> cache = ignite.getOrCreateCache(new CacheConfiguration<String, String>()
-				.setName("test-cache").setCacheLoaderFactory(new AnotherCacheLoaderFactory()).setReadThrough(true));
-		System.out.println(cache.get("Aasd"));
+				.setName("test-cache_1").setCacheLoaderFactory(new AnotherCacheLoaderFactory()).setReadThrough(true));
+		System.out.println(cache.get("Aaa"));
 	}
 
 }

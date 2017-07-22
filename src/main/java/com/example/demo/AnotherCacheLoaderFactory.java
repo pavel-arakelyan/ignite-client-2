@@ -2,9 +2,6 @@ package com.example.demo;
 
 import javax.cache.configuration.Factory;
 
-/**
- * @author pavel.arakelyan
- */
 public class AnotherCacheLoaderFactory
 		implements Factory<AnotherLoader> {
 
